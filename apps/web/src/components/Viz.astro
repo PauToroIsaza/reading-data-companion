@@ -1,0 +1,85 @@
+---
+import { getVizEntry } from '../lib/viz-loader';
+import type { VizPattern } from '../lib/viz-schema';
+
+interface Props {
+  id: string;
+  book: string;
+  chapter: number;
+}
+
+const { id, book, chapter } = Astro.props;
+const entry = getVizEntry(book, chapter, id);
+
+if (!entry) {
+  throw new Error(`Visualization "${id}" not found in ${book}/chapter-${chapter}.viz.json`);
+}
+
+// Pattern component mapping - will be replaced with actual components
+const patternLabels: Record<VizPattern, string> = {
+  lookup: 'Data Lookup',
+  scrollytelling: 'Scrollytelling',
+  table: 'Explorable Table',
+  comparison: 'Comparison Chart',
+  flow: 'Flow Diagram',
+  timeseries: 'Time Series',
+  geo: 'Map',
+  simulator: 'Simulator',
+};
+---
+
+<figure class="viz" data-pattern={entry.pattern} data-id={entry.id}>
+  <div class="viz-placeholder">
+    <span class="viz-pattern-label">{patternLabels[entry.pattern]}</span>
+    <code class="viz-id">{entry.id}</code>
+    {entry.description && <p class="viz-description">{entry.description}</p>}
+  </div>
+  {entry.sources && entry.sources.length > 0 && (
+    <figcaption class="viz-sources">
+      Sources: {entry.sources.join(', ')}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .viz {
+    margin: 2rem 0;
+    padding: 0;
+  }
+
+  .viz-placeholder {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: #f9f9f9;
+  }
+
+  .viz-pattern-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .viz-id {
+    display: block;
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .viz-description {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0;
+  }
+
+  .viz-sources {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.5rem;
+  }
+</style>
