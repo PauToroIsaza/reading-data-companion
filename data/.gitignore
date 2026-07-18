@@ -1,0 +1,6 @@
+# Ignore raw source data (often too large for git)
+raw/*
+!raw/.gitkeep
+
+# Track processed output (consumed by the site)
+!processed/
