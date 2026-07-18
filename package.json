@@ -1,0 +1,9 @@
+{
+  "name": "reading-data-companion",
+  "private": true,
+  "packageManager": "pnpm@11.14.0",
+  "scripts": {
+    "dev": "pnpm --filter @rdc/web dev",
+    "build": "pnpm --filter @rdc/web build"
+  }
+}
