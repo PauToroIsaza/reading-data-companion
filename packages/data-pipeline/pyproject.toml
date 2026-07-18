@@ -1,0 +1,19 @@
+[project]
+name = "data-pipeline"
+version = "0.1.0"
+description = "Data processing pipeline for Reading Data Companion"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
