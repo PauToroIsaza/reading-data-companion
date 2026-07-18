@@ -1,0 +1,46 @@
+# Book Metadata
+
+title: "The Grid: The Fraying Wires Between Americans and Our Energy Future"
+author: "Gretchen Bakke"
+year: 2016
+isbn: "978-1632865687"
+
+chapters:
+  - slug: introduction
+    title: "Introduction"
+  - slug: the-way-of-the-wind
+    title: "The Way of the Wind"
+  - slug: how-the-grid-got-its-wires
+    title: "How the Grid Got Its Wires"
+  - slug: the-consolidation-of-power
+    title: "The Consolidation of Power"
+  - slug: the-cardigan-path
+    title: "The Cardigan Path"
+  - slug: things-fall-apart
+    title: "Things Fall Apart"
+  - slug: two-birds-one-stone
+    title: "Two Birds, One Stone"
+  - slug: a-tale-of-two-storms
+    title: "A Tale of Two Storms"
+  - slug: in-search-of-the-holy-grail
+    title: "In Search of the Holy Grail"
+  - slug: afterword
+    title: "Afterword: Contemplating Death in the Afternoon"
+
+themes:
+  - Grid infrastructure and aging
+  - Renewable energy integration
+  - Power outages and reliability
+  - Utility regulation and deregulation
+  - Energy storage
+
+data_sources:
+  - name: "EIA Form 861 (Reliability Metrics)"
+    url: "https://www.eia.gov/electricity/data/eia861/"
+    notes: "SAIDI/SAIFI outage data by utility"
+  - name: "LBNL Interconnection Queues"
+    url: "https://emp.lbl.gov/queues"
+    notes: "Clean energy project backlogs"
+  - name: "ASCE Infrastructure Report Cards"
+    url: "https://infrastructurereportcard.org/"
+    notes: "State-level grid condition grades"

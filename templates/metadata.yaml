@@ -1,0 +1,27 @@
+# Book Metadata
+# Copy this file to {book-slug}/metadata.yaml and fill in the details
+
+title: ""
+author: ""
+year:
+isbn: ""  # optional
+
+# List chapters in order
+# Use kebab-case slugs that match your directory names
+chapters:
+  - slug: introduction
+    title: "Introduction"
+  - slug: chapter-1
+    title: "Chapter 1 Title"
+  # Add more chapters...
+
+# Key themes to explore through data visualization
+themes:
+  - ""
+
+# General data sources relevant to this book
+# Specific datasets go in data/raw/{book-slug}/{chapter-slug}/
+data_sources:
+  - name: ""
+    url: ""
+    notes: ""
