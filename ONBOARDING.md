@@ -10,6 +10,7 @@ Choose a kebab-case slug for the book (e.g., `the-grid`, `energy-democracy`).
 mkdir -p books/{book-slug}/brainstorming/chapters
 mkdir -p books/{book-slug}/brainstorming/side
 mkdir -p books/{book-slug}/data/raw
+mkdir -p books/{book-slug}/analysis
 ```
 
 ## 2. Add metadata
@@ -42,13 +43,16 @@ As you read each chapter:
    ```
    mkdir -p books/{book-slug}/brainstorming/chapters/{chapter-slug}
    mkdir -p books/{book-slug}/data/raw/{chapter-slug}
+   mkdir -p books/{book-slug}/analysis/{chapter-slug}
    ```
 
 2. **Brainstorm visualizations:** Add notes to `brainstorming/chapters/{chapter-slug}/`
 
 3. **Gather data:** Store raw datasets in `data/raw/{chapter-slug}/`
 
-4. **Update progress:** Check off stages in `progress.md`
+4. **Analyze data:** Add notebooks/scripts to `analysis/{chapter-slug}/`. Import shared utilities from `packages/data-pipeline/` as needed.
+
+5. **Update progress:** Check off stages in `progress.md`
 
 ## Directory structure overview
 
@@ -56,6 +60,8 @@ As you read each chapter:
 books/{book-slug}/
 ├── metadata.yaml              # Book info, chapters, themes
 ├── progress.md                # Reading/building progress
+├── analysis/
+│   └── {chapter-slug}/        # Notebooks/scripts per chapter
 ├── data/
 │   └── raw/
 │       └── {chapter-slug}/    # Raw datasets per chapter
