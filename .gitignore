@@ -222,3 +222,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Book data (raw data, processed outputs, caches)
+books/*/data/
