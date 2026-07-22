@@ -5,8 +5,13 @@ from pathlib import Path
 # Base paths
 PROJECT_ROOT = Path(__file__).parents[7]  # Up to reading-data-companion/
 BOOK_DATA_DIR = PROJECT_ROOT / "books" / "the-grid" / "data"
-RAW_DIR = BOOK_DATA_DIR / "raw" / "introduction" / "Outage_Dataset"
+RAW_INTRO_DIR = BOOK_DATA_DIR / "raw" / "introduction"
+RAW_DIR = RAW_INTRO_DIR / "Outage_Dataset"
 PROCESSED_DIR = BOOK_DATA_DIR / "processed" / "introduction"
+
+# Enrichment data files
+BA_LOOKUP_FILE = RAW_INTRO_DIR / "BalancingAuthorityLookupTool.xlsx"
+POWER_PROFILER_FILE = RAW_INTRO_DIR / "power_profiler_zipcode_tool_v14.3.xlsx"
 
 # Years to include (exclude 2014 - only has Nov-Dec data)
 YEARS = list(range(2015, 2024))  # 2015-2023

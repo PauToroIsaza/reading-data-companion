@@ -25,6 +25,9 @@ from data_pipeline.books.the_grid.introduction.normalize_events import (
     add_event_categories,
     get_primary_event_category,
 )
+from data_pipeline.books.the_grid.introduction.enrichments import (
+    load_fips_enrichments,
+)
 
 
 def load_all_years() -> pd.DataFrame:
@@ -211,30 +214,45 @@ def build_all() -> dict[str, pd.DataFrame]:
     population = load_county_population(years=YEARS)
     print(f"   Loaded population for {len(population):,} county-years")
 
+    # Load enrichment data (utility, market type, eGRID subregion)
+    print("\n3. Loading enrichment data...")
+    enrichments = load_fips_enrichments()
+    print(f"   {len(enrichments):,} FIPS records with utility/grid data")
+
     # Build datasets
-    print("\n3. Building county-year summary...")
+    print("\n4. Building county-year summary...")
     county_summary = build_county_year_summary(df, population)
     print(f"   {len(county_summary):,} county-year records")
 
-    print("\n4. Building county-year by event type...")
+    # Merge enrichments into county summary
+    print("\n5. Adding enrichments to county summary...")
+    county_summary = county_summary.merge(
+        enrichments,
+        on="fips",
+        how="left",
+    )
+    enriched_count = county_summary["utility_provider"].notna().sum()
+    print(f"   {enriched_count:,} records enriched with utility/grid data")
+
+    print("\n6. Building county-year by event type...")
     county_by_event = build_county_year_by_event(df)
     print(f"   {len(county_by_event):,} records")
 
-    print("\n5. Building county-year by month...")
+    print("\n7. Building county-year by month...")
     county_by_month = build_county_year_by_month(df)
     print(f"   {len(county_by_month):,} records")
 
-    print("\n6. Building county-year by hour...")
+    print("\n8. Building county-year by hour...")
     county_by_hour = build_county_year_by_hour(df)
     print(f"   {len(county_by_hour):,} records")
 
-    print("\n7. Building national summaries...")
+    print("\n9. Building national summaries...")
     national_summary = build_national_year_summary(county_summary)
     national_by_event = build_national_year_by_event(county_by_event)
     national_by_month = build_national_year_by_month(county_by_month)
     print(f"   National summary: {len(national_summary)} years")
 
-    print("\n8. Building state summaries...")
+    print("\n10. Building state summaries...")
     state_summary = build_state_year_summary(county_summary)
     print(f"   {len(state_summary):,} state-year records")
 
@@ -252,7 +270,7 @@ def build_all() -> dict[str, pd.DataFrame]:
 
 def write_all(datasets: dict[str, pd.DataFrame]) -> None:
     """Write all datasets to JSON files."""
-    print("\n9. Writing JSON files...")
+    print("\n11. Writing JSON files...")
 
     for name, df in datasets.items():
         path = get_output_file(name)
